@@ -34,25 +34,25 @@ export default function SignUpPage() {
           />
         </div>
         <div className="w-full flex flex-col gap-[8px]">
-          <label className="font-[500] text-[12px]" htmlFor="email">
+          <label className="font-[500] text-[12px]" htmlFor="Name">
             Your name
           </label>
           <input
             className="bg-[#F8F9FC] py-[10px] pr-[10px] pl-[17px] rounded-[4px] placeholder:text-[#C3CAD5] placeholder:text-[16px]"
             type="text"
-            name="text"
+            name="Name"
             placeholder="Mega Chad"
           />
         </div>
         <div className="w-full flex flex-col gap-[8px]">
-          <label className="font-[500] text-[12px]" htmlFor="email">
+          <label className="font-[500] text-[12px]" htmlFor="Password">
             Password
           </label>
           <div className="relative inline-block">
             <input
               className="w-full bg-[#F8F9FC] py-[10px] pr-[10px] pl-[17px] rounded-[4px] placeholder:text-[#C3CAD5] placeholder:text-[16px]"
               type="password"
-              name="password"
+              name="Password"
               placeholder="Enter password"
             />
             <i className="absolute right-[10px] top-[50%] -translate-y-2/4">
@@ -66,8 +66,8 @@ export default function SignUpPage() {
         <button className="bg-[#32ABF2] w-full py-[11px] rounded-[8px] text-[#FFFFFF] font-[500] text-[14px]">
           Create account
         </button>
-        <p className="self-center ">
-          Already have an account? {" "}
+        <p className="self-center texr-[12px]">
+          Already have an account?{" "}
           <Link href="#" className="text-[#32ABF2]">
             Login
           </Link>

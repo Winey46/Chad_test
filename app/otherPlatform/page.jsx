@@ -9,7 +9,7 @@ export default function OtherPlatformPage() {
         <h3 className="font-[500] text-[16px] text-[#134267]">
           Response received
         </h3>
-        <p className="text-[14px] leading-[21px]">
+        <p className="text-[14px] leading-[21px] text-center">
           Thank you for your interest in Chad! We’ll be hard at work building
           integrations to support your platform.
         </p>

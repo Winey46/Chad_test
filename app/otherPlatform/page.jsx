@@ -1,6 +1,6 @@
 import { checkRoundedBig } from "@/utils/icons";
 
-export default function OtherPlatfomConnectedPage() {
+export default function OtherPlatformPage() {
   return (
     <div className="w-full mt-[112px] flex flex-col items-center gap-[32px]">
       <i>{checkRoundedBig}</i>

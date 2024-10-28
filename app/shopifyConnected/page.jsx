@@ -2,7 +2,7 @@ import { checkRounded } from "@/utils/icons";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function ShopifyConnectedPage() {
+export default function UseOtherPlatfomPage() {
   return (
     <div className="w-full mt-[112px] flex flex-col items-center gap-[32px]">
       <div className="relative">

@@ -1,5 +1,6 @@
-import { chevronLight, chevronDark, check } from "@/utils/icons";
+import { chevronLight, chevronDark } from "@/utils/icons";
 import Link from "next/link";
+import { Form } from "react-bootstrap";
 
 export default function OtherStorePage() {
   return (
@@ -30,26 +31,23 @@ export default function OtherStorePage() {
       </div>
 
       <form className="w-full flex flex-col gap-[8px]">
-        <label className="font-[500] text-[12px]" htmlFor="platform">
-          Platform
-        </label>
-        <input
-          className="bg-[#F8F9FC] py-[10px] pr-[10px] pl-[17px] rounded-[4px] placeholder:text-[#C3CAD5] placeholder:text-[16px]"
-          type="text"
-          name="platform"
-          placeholder="Select platform"
-        />
-        <i className="">{chevronDark}</i>
+        <label className="font-[500] text-[12px]">Platform</label>
+        <Form.Select className="bg-[#F8F9FC] py-[10px] pr-[10px] pl-[15px] rounded-[4px]text-[16px]">
+          <option className="text-[#4F637D]">Select platform</option>
+          <option value="1">Platform One</option>
+          <option value="2">Platform Two</option>
+          <option value="3">Platform Three</option>
+        </Form.Select>
       </form>
 
       <div className="flex flex-col gap-[16px]">
         <button className="bg-[#32ABF2] w-full py-[11px] rounded-[8px] text-[#FFFFFF] font-[500] text-[14px]">
-          Create account
+          Submit
         </button>
-        <p className="self-center ">
-          Already have an account?{" "}
+        <p className="self-center text-[12px]">
+          Actually use Shopify?{" "}
           <Link href="#" className="text-[#32ABF2]">
-            Login
+            Connect
           </Link>
         </p>
       </div>

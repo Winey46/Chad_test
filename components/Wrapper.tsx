@@ -7,7 +7,7 @@ import { UserContext } from "./UserContext";
 export default function Wrapper({ children }: { children: React.ReactNode }) {
   const userCtx = useContext(UserContext);
 
-  console.log("authenticated user: ", userCtx?.user);
+  console.log("current user: ", userCtx?.user);
 
   return (
     <AnimatePresence>
@@ -16,7 +16,6 @@ export default function Wrapper({ children }: { children: React.ReactNode }) {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
-        exit={{ opacity: 1 }}
       >
         {children}
       </motion.div>

@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "./UserContext";
 import { login } from "@/utils/http";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function SignIn() {
   const [isPending, setIsPending] = useState<boolean>(false);
@@ -65,12 +65,13 @@ export default function SignIn() {
         response = await login(false);
       }
 
+      setIsPending(false);
+
       if (!response.ok)
         throw new Error("Could not login, please try again later");
       else {
         push("/");
       }
-      setIsPending(false);
     }
   }
 
@@ -94,89 +95,96 @@ export default function SignIn() {
         <h1 className="exodus__font text-[24px] text-[#20496C]">Chad</h1>
       </header>
 
-      <main className="flex flex-col gap-[32px]">
-        <div className="flex flex-col gap-[8px]">
-          <h2 className="font-[600] text-[24px] text-[#134267]">
-            Welcome back
-          </h2>
-          <p className="text-[14px] leading-[21px]">
-            Feeling ready to take on the day? Chad is too!
-          </p>
-        </div>
-
-        <form className="flex flex-col gap-[24px]">
-          <div className="w-full flex flex-col gap-[8px]">
-            <label className="font-[500] text-[12px]" htmlFor="email">
-              Email
-            </label>
-            <input
-              className="bg-[#F8F9FC] py-[10px] pr-[10px] pl-[17px] rounded-[4px] placeholder:text-[#C3CAD5] placeholder:text-[16px]"
-              type="email"
-              name="email"
-              placeholder="megachad@trychad.com"
-              onChange={emailInputChange}
-            />
-            {emailError && (
-              <p className=" text-[14px] text-red-400">
-                Should contain "@" and "." symbols
-              </p>
-            )}
+      <AnimatePresence>
+        <motion.main
+          className="flex flex-col gap-[32px]"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1 }}
+        >
+          <div className="flex flex-col gap-[8px]">
+            <h2 className="font-[600] text-[24px] text-[#134267]">
+              Welcome back
+            </h2>
+            <p className="text-[14px] leading-[21px]">
+              Feeling ready to take on the day? Chad is too!
+            </p>
           </div>
-          <div className="w-full flex flex-col gap-[8px]">
-            <label className="font-[500] text-[12px]" htmlFor="Password">
-              Password
-            </label>
-            <div className="relative inline-block">
+
+          <form className="flex flex-col gap-[24px]">
+            <div className="w-full flex flex-col gap-[8px]">
+              <label className="font-[500] text-[12px]" htmlFor="email">
+                Email
+              </label>
               <input
-                className="w-full bg-[#F8F9FC] py-[10px] pr-[10px] pl-[17px] rounded-[4px] placeholder:text-[#C3CAD5] placeholder:text-[16px]"
-                type={showPassword ? "text" : "password"}
-                name="Password"
-                placeholder="Enter password"
-                onChange={passwordInputChange}
+                className="bg-[#F8F9FC] py-[10px] pr-[10px] pl-[17px] rounded-[4px] placeholder:text-[#C3CAD5] placeholder:text-[16px]"
+                type="email"
+                name="email"
+                placeholder="megachad@trychad.com"
+                onChange={emailInputChange}
               />
-              <i
-                className="absolute right-[10px] top-[50%] -translate-y-2/4"
-                onClick={handleShowPassword}
-              >
-                {showPassword ? eye : eyeOff}
-              </i>
+              {emailError && (
+                <p className=" text-[14px] text-red-400">
+                  Should contain "@" and "." symbols
+                </p>
+              )}
             </div>
-            {passwordError && (
-              <p className=" text-[14px] text-red-400">
-                Should contain at least 6 symbols, upper and lower case symbols
-                and numbers
-              </p>
-            )}
-          </div>
-        </form>
+            <div className="w-full flex flex-col gap-[8px]">
+              <label className="font-[500] text-[12px]" htmlFor="Password">
+                Password
+              </label>
+              <div className="relative inline-block">
+                <input
+                  className="w-full bg-[#F8F9FC] py-[10px] pr-[10px] pl-[17px] rounded-[4px] placeholder:text-[#C3CAD5] placeholder:text-[16px]"
+                  type={showPassword ? "text" : "password"}
+                  name="Password"
+                  placeholder="Enter password"
+                  onChange={passwordInputChange}
+                />
+                <i
+                  className="absolute right-[10px] top-[50%] -translate-y-2/4"
+                  onClick={handleShowPassword}
+                >
+                  {showPassword ? eye : eyeOff}
+                </i>
+              </div>
+              {passwordError && (
+                <p className=" text-[14px] text-red-400">
+                  Should contain at least 6 symbols, upper and lower case
+                  symbols and numbers
+                </p>
+              )}
+            </div>
+          </form>
 
-        <div className="flex flex-col gap-[16px]">
-          <motion.button
-            className={
-              isPending
-                ? "hidden"
-                : "bg-[#32ABF2] w-full py-[11px] rounded-[8px] text-[#FFFFFF] font-[500] text-[14px] hover:text-amber-300"
-            }
-            onClick={handleLogin}
-            disabled={isPending}
-            initial={{ scale: 1 }}
-            whileHover={{ scale: 1.1 }}
-            transition={{ type: "spring", stiffness: 300 }}
-          >
-            Login
-          </motion.button>
-          {isPending && <p className="spinner self-center"></p>}
-          <p className="self-center text-[12px]">
-            Don’t have an account?{" "}
-            <Link
-              href="/signUp"
-              className="text-[#32ABF2] hover:text-amber-300"
+          <div className="flex flex-col gap-[16px]">
+            <motion.button
+              className={
+                isPending
+                  ? "hidden"
+                  : "bg-[#32ABF2] w-full py-[11px] rounded-[8px] text-[#FFFFFF] font-[500] text-[14px] hover:text-amber-300"
+              }
+              onClick={handleLogin}
+              disabled={isPending}
+              initial={{ scale: 1 }}
+              whileHover={{ scale: 1.1 }}
+              transition={{ type: "spring", stiffness: 300 }}
             >
-              Join the waitlist
-            </Link>
-          </p>
-        </div>
-      </main>
+              Login
+            </motion.button>
+            {isPending && <p className="spinner self-center"></p>}
+            <p className="self-center text-[12px]">
+              Don’t have an account?{" "}
+              <Link
+                href="/signUp"
+                className="text-[#32ABF2] hover:text-amber-300"
+              >
+                Join the waitlist
+              </Link>
+            </p>
+          </div>
+        </motion.main>
+      </AnimatePresence>
     </>
   );
 }

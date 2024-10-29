@@ -65,13 +65,12 @@ export default function SignIn() {
         response = await login(false);
       }
 
-      setIsPending(false);
-
       if (!response.ok)
         throw new Error("Could not login, please try again later");
       else {
         push("/");
       }
+      setIsPending(false);
     }
   }
 

@@ -69,14 +69,6 @@ export default function SignUp() {
     if (isSubmit) {
       setIsPending(true);
 
-      userCtx?.setUser({
-        name: nameValue,
-        email: emailValue,
-        store: undefined,
-        gmail: undefined,
-        password: passwordValue,
-      });
-
       const response = await createUser(emailValue, nameValue, passwordValue);
 
       if (!response.ok) throw new Error("Could not create user");
@@ -84,6 +76,14 @@ export default function SignUp() {
         setIsPending(false);
 
         push("/signUp/shopify");
+
+        userCtx?.setUser({
+          name: nameValue,
+          email: emailValue,
+          store: undefined,
+          gmail: undefined,
+          password: passwordValue,
+        });
       }
     }
   }
@@ -209,8 +209,9 @@ export default function SignUp() {
         <p className="self-center text-[12px]">
           Already have an account?{" "}
           <Link
-            href="/signIn"
             className="text-[#32ABF2] text-[12px] hover:text-amber-300"
+            href="/signIn"
+            prefetch
           >
             Login
           </Link>

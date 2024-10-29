@@ -18,6 +18,8 @@ export default function Store({ storeName }: IStore) {
   const { push } = useRouter();
 
   const handleContinue = (): void => {
+    push("/signUp/gmailConnect");
+
     userCtx?.setUser({
       name: userCtx?.user?.name,
       email: userCtx?.user?.email,
@@ -25,8 +27,6 @@ export default function Store({ storeName }: IStore) {
       gmail: userCtx?.user?.gmail,
       password: userCtx?.user?.password,
     });
-
-    push("/signUp/gmailConnect");
   };
 
   return (

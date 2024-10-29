@@ -30,6 +30,8 @@ export default function WithoutGmail() {
   };
 
   const handleSubmit = (): void => {
+    push("/otherPlatform");
+
     userCtx?.setUser({
       name: userCtx?.user?.name,
       email: userCtx?.user?.email,
@@ -37,8 +39,6 @@ export default function WithoutGmail() {
       gmail: false,
       password: userCtx?.user?.password,
     });
-
-    push("/otherPlatform");
   };
 
   return (

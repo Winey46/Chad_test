@@ -21,6 +21,8 @@ export default function GmailConnect() {
   };
 
   const handleConnectGmail = (): void => {
+    push("/onboardingComplete");
+
     userCtx?.setUser({
       name: userCtx?.user?.name,
       email: userCtx?.user?.email,
@@ -28,8 +30,6 @@ export default function GmailConnect() {
       gmail: true,
       password: userCtx?.user?.password,
     });
-
-    push("/onboardingComplete");
   };
 
   return (

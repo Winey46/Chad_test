@@ -7,7 +7,7 @@ import { UserContext } from "./UserContext";
 export default function Wrapper({ children }: { children: React.ReactNode }) {
   const userCtx = useContext(UserContext);
 
-  console.log(userCtx?.user);
+  console.log("authenticated user: ", userCtx?.user);
 
   return (
     <AnimatePresence>

@@ -20,7 +20,7 @@ export default function Shopify() {
     push("/signUp/gmailConnect");
   };
 
-  const handleConnectStore = (): void => push("/store/shopify");
+  const handleConnectStore = (): void => push("/storeName/shopify");
 
   return (
     <main className="flex flex-col gap-[32px]">
@@ -111,6 +111,7 @@ export default function Shopify() {
         <Link
           className="self-center text-[12px] hover:text-amber-300"
           href="/signUp/otherStore"
+          prefetch
         >
           I don’t use Shopify
         </Link>

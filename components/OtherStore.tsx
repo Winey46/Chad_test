@@ -29,7 +29,7 @@ export default function OtherStore() {
     setOption(event.target.value);
   };
 
-  const handleSubmit = (): void => push(`/store/${option}`);
+  const handleSubmit = (): void => push(`/storeName/${option}`);
 
   return (
     <main className="flex flex-col gap-[32px]">
@@ -76,9 +76,9 @@ export default function OtherStore() {
           onChange={handleOptionChange}
         >
           <option>Select platform</option>
-          <option value="1">Platform One</option>
-          <option value="2">Platform Two</option>
-          <option value="3">Platform Three</option>
+          <option value="platform-one">Platform One</option>
+          <option value="platform-two">Platform Two</option>
+          <option value="platform-three">Platform Three</option>
         </Form.Select>
       </form>
 

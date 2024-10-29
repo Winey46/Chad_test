@@ -1,18 +1,50 @@
-import { chevronLight, chevronDark, check } from "@/utils/icons";
+"use client";
 
-export default function ShopifyPage() {
+import { chevronLight, chevronDark, check } from "@/utils/icons";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useContext } from "react";
+import { UserContext } from "./UserContext";
+import { motion } from "framer-motion";
+
+export default function Shopify() {
+  const userCtx = useContext(UserContext);
+
+  const { push } = useRouter();
+
+  const handlePrevPage = (): void => {
+    push("/signUp");
+  };
+
+  const handleNextPage = (): void => {
+    push("/signUp/gmailConnect");
+  };
+
+  const handleConnectStore = (): void => push("/store/shopify");
+
   return (
-    <>
+    <main className="flex flex-col gap-[32px]">
       <div className="flex flex-col gap-[8px]">
         <p className="text-[12px]">Step 2 of 4</p>
         <span className="flex h-[8px] border-[1px] border-[#C9D3E0] rounded-[4px]">
           <span className="h-full w-[50%] bg-[#C9D3E0]"></span>
         </span>
         <div className="w-full flex justify-between">
-          <button className="flex items-center text-[12px] px-[8px]">
+          <button
+            className="flex items-center text-[12px] px-[8px] hover:text-amber-300"
+            onClick={handlePrevPage}
+          >
             <i>{chevronDark}</i>Prev
           </button>
-          <button className="flex items-center text-[12px] px-[8px] text-[#C3CAD5]">
+          <button
+            className={
+              userCtx?.user?.store === "shopify"
+                ? "flex items-center text-[12px] px-[8px] hover:text-amber-300"
+                : "flex items-center text-[12px] px-[8px] text-[#C3CAD5]"
+            }
+            onClick={handleNextPage}
+            disabled={userCtx?.user?.store !== "shopify"}
+          >
             Next<i className="rotate-180">{chevronLight}</i>
           </button>
         </div>
@@ -64,16 +96,25 @@ export default function ShopifyPage() {
             </p>
           </div>
         </li>
-
-        <div className="flex flex-col gap-[16px]">
-          <button className="bg-[#32ABF2] w-full py-[11px] rounded-[8px] text-[#FFFFFF] font-[500] text-[14px]">
-            Connect store
-          </button>
-          <button className="self-center text-[12px]">
-            I don’t use Shopify
-          </button>
-        </div>
       </ul>
-    </>
+
+      <div className="flex flex-col gap-[16px]">
+        <motion.button
+          className="bg-[#32ABF2] w-full py-[11px] rounded-[8px] text-[#FFFFFF] font-[500] text-[14px] hover:text-amber-300"
+          onClick={handleConnectStore}
+          initial={{ scale: 1 }}
+          whileHover={{ scale: 1.1 }}
+          transition={{ type: "spring", stiffness: 300 }}
+        >
+          Connect store
+        </motion.button>
+        <Link
+          className="self-center text-[12px] hover:text-amber-300"
+          href="/signUp/otherStore"
+        >
+          I don’t use Shopify
+        </Link>
+      </div>
+    </main>
   );
 }

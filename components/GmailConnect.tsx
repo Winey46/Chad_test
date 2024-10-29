@@ -1,6 +1,37 @@
-import { chevronLight, chevronDark, check, gLogo } from "@/utils/icons";
+"use client";
 
-export default function GmailConnectPage() {
+import { chevronLight, chevronDark, check, gLogo } from "@/utils/icons";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useContext } from "react";
+import { UserContext } from "./UserContext";
+import { motion } from "framer-motion";
+
+export default function GmailConnect() {
+  const userCtx = useContext(UserContext);
+
+  const { push } = useRouter();
+
+  const handlePrevPage = (): void => {
+    push("/signUp/shopify");
+  };
+
+  const handleNextPage = (): void => {
+    push("/onboardingComplete");
+  };
+
+  const handleConnectGmail = (): void => {
+    userCtx?.setUser({
+      name: userCtx?.user?.name,
+      email: userCtx?.user?.email,
+      store: userCtx?.user?.store,
+      gmail: true,
+      password: userCtx?.user?.password,
+    });
+
+    push("/onboardingComplete");
+  };
+
   return (
     <main className="flex flex-col gap-[32px]">
       <div className="flex flex-col gap-[8px]">
@@ -9,10 +40,21 @@ export default function GmailConnectPage() {
           <span className="h-full w-[75%] bg-[#C9D3E0]"></span>
         </span>
         <div className="w-full flex justify-between">
-          <button className="flex items-center text-[12px] px-[8px]">
+          <button
+            className="flex items-center text-[12px] px-[8px] hover:text-amber-300"
+            onClick={handlePrevPage}
+          >
             <i>{chevronDark}</i>Prev
           </button>
-          <button className="flex items-center text-[12px] px-[8px] text-[#C3CAD5]">
+          <button
+            className={
+              userCtx?.user?.gmail
+                ? "flex items-center text-[12px] px-[8px]hover:text-amber-300"
+                : "flex items-center text-[12px] px-[8px] text-[#C3CAD5]"
+            }
+            onClick={handleNextPage}
+            disabled={!userCtx?.user?.gmail}
+          >
             Next<i className="rotate-180">{chevronLight}</i>
           </button>
         </div>
@@ -68,13 +110,24 @@ export default function GmailConnectPage() {
       </ul>
 
       <div className="flex flex-col gap-[16px]">
-        <div className="flex rounded-[2px] border-[1px] border-[#5383EC]">
+        <motion.button
+          className="flex justify-center items-center rounded-[2px] border-[1px] border-[#5383EC] group"
+          onClick={handleConnectGmail}
+          initial={{ scale: 1 }}
+          whileHover={{ scale: 1.1 }}
+          transition={{ type: "spring", stiffness: 300 }}
+        >
           <i className="px-[14px] py-[15px]">{gLogo}</i>
-          <button className="bg-[#5383EC] w-full py-[11px] text-[#FFFFFF] font-[500] text-[14px]">
+          <p className="bg-[#5383EC] w-full py-[15px] text-[#FFFFFF] font-[500] text-[14px] group-hover:text-amber-300">
             Connect Gmail account
-          </button>
-        </div>
-        <button className="self-center text-[12px]">I don’t use Gmail</button>
+          </p>
+        </motion.button>
+        <Link
+          className="self-center text-[12px] hover:text-amber-300"
+          href="/signUp/gmailConnect/withoutGmail"
+        >
+          I don’t use Gmail
+        </Link>
       </div>
     </main>
   );

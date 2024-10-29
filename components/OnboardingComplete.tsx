@@ -1,6 +1,16 @@
-import { checkRoundedBig } from "@/utils/icons";
+"use client";
 
-export default function OnboardingCompletePage() {
+import { checkRoundedBig } from "@/utils/icons";
+import { useRouter } from "next/navigation";
+import { motion } from "framer-motion";
+
+export default function OnboardingComplete() {
+  const { push } = useRouter();
+
+  const handleOk = (): void => {
+    push("/signIn");
+  };
+
   return (
     <div className="w-full mt-[112px] flex flex-col items-center gap-[32px]">
       <i>{checkRoundedBig}</i>
@@ -13,9 +23,15 @@ export default function OnboardingCompletePage() {
           Chad doesn’t support mobile browsers. To access your dashboard, login
           from your laptop or desktop computer.
         </p>
-        <button className="bg-[#32ABF2] w-full py-[11px] rounded-[8px] text-[#FFFFFF] font-[500] text-[14px] mt-[16px]">
+        <motion.button
+          className="bg-[#32ABF2] w-full py-[11px] rounded-[8px] text-[#FFFFFF] font-[500] text-[14px] mt-[16px] hover:text-amber-300"
+          onClick={handleOk}
+          initial={{ scale: 1 }}
+          whileHover={{ scale: 1.1 }}
+          transition={{ type: "spring", stiffness: 300 }}
+        >
           Ok
-        </button>
+        </motion.button>
       </div>
     </div>
   );

@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import Image from "next/image";
+import { Providers } from "@/components/Providers";
+import Wrapper from "@/components/Wrapper";
 
 const exodusSans = localFont({
   src: "./fonts/EudoxusSans-Bold.woff",
@@ -29,24 +31,23 @@ export default function RootLayout({
       <body
         className={`${exodusSans.variable} ${interSans.variable} antialiased`}
       >
-        <div
-          id="root"
-          className="flex justify-center items-start pt-[64px] min-h-[100vh]"
-
-        >
-          <div className="w-[100%] min-h-[100vh] max-h-[100%] overflow-hidden absolute left-0 top-0 -z-10 ">
-            <Image
-              className="w-[100%]"
-              src="/images/tileable_doodle.png"
-              alt="tileable_doodle"
-              width={834}
-              height={1194}
-            />
+        <Providers>
+          <div
+            id="root"
+            className="flex justify-center items-start  min-h-[100vh]"
+          >
+            <div className="w-[100%] min-h-[732px] sm:min-h-[796px] max-h-[100%] overflow-hidden absolute left-0 top-0 -z-10 ">
+              <Image
+                className="w-[100%]"
+                src="/images/tileable_doodle.png"
+                alt="tileable_doodle"
+                width={834}
+                height={1194}
+              />
+            </div>
+            <Wrapper>{children}</Wrapper>
           </div>
-          <div className="shadow bg-[#FFFFFF] px-[32px] sm:px-[50px] w-full sm:w-[460px] sm:py-[64px] sm:rounded-[8px] sm:min-h-[732px]">
-            {children}
-          </div>
-        </div>
+        </Providers>
       </body>
     </html>
   );
